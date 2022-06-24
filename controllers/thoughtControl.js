@@ -36,21 +36,23 @@ const thoughtController = {
       });
   },
 
-  createThoughts({ params, body }, res) {
-    Thoughts.create(body)
+  createThought({ params, body }, res) {
+    Thought.create(body)
       .then(({ _id }) => {
-        return Users.findOneAndUpdate(
-          { _id: params.userId },
+        return User.findOneAndUpdate(
+          { _id: body.userId },
           { $push: { thoughts: _id } },
           { new: true }
         );
       })
-      .then((dbThoughtsData) => {
-        if (!dbThoughtsData) {
-          res.status(404).json({ message: "ID has no thoughts" });
-          return;
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          return res
+            .status(404)
+            .json({ message: "Thought created, no user associated" });
         }
-        res.json(dbThoughtsData);
+
+        res.json({ message: "Thought creation successful" });
       })
       .catch((err) => res.json(err));
   },
@@ -86,6 +88,17 @@ const thoughtController = {
       })
       .catch((err) => res.json(err));
   },
+  //   deleteThoughts({ params }, res) {
+  //     Thought.findOneAndDelete({ _id: params.id })
+  //       .then((dbThoughtData) => {
+  //         if (!dbThoughtData) {
+  //           res.status(404).json({ message: "No thought with this id" });
+  //           return;
+  //         }
+  //         res.json(dbThoughtData);
+  //       })
+  //       .catch((err) => res.status(400).json(err));
+  //   },
+  // };
 };
-
 module.exports = thoughtController;
