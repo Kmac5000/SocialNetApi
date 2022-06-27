@@ -1,5 +1,6 @@
 # The Social Network API
 
+[example video link](./assets/SocialNet.mp4)
 ![example of db in Mongo](./assets/socialNetMongo.jpg)
 
 ## Description
