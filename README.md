@@ -1,6 +1,6 @@
 # The Social Network API
 
-![License](https://img.shields.io/badge/License--yellow.svg)
+![example of db in Mongo](./assets/socialNetMongo.jpg)
 
 ## Description
 
